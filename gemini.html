@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陳婷 Ting Chen | 財務金融 × 數據科技 個人品牌網站</title>
+  
+  <!-- Google Fonts: Inter & Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js for Interactive Financial Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              900: '#134e4a',
+            },
+            fintech: {
+              dark: '#0b1120',
+              card: '#131e36',
+              border: '#1e293b',
+              accent: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom scrollbar and glassmorphism styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0d9488;
+    }
+    .glass {
+      background: rgba(19, 30, 54, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 50% 30%, rgba(20, 184, 166, 0.18) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%);
+    }
+  </style>
+</head>
+<body class="bg-[#0b1120] text-slate-200 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Navigation Header -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Brand Logo -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+            TC
+          </div>
+          <div>
+            <div class="font-bold text-white tracking-wide group-hover:text-brand-400 transition-colors">陳婷 Ting Chen</div>
+            <div class="text-xs text-slate-400 font-mono">FinTech & Financial Analysis</div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1 lg:space-x-6 text-sm font-medium">
+          <a href="#home" class="text-slate-300 hover:text-brand-400 transition-colors px-3 py-2">首頁</a>
+          <a href="#about" class="text-slate-300 hover:text-brand-400 transition-colors px-3 py-2">關於我</a>
+          <a href="#solutions" class="text-slate-300 hover:text-brand-400 transition-colors px-3 py-2">數據解決方案</a>
+          <a href="#portfolio" class="text-slate-300 hover:text-brand-400 transition-colors px-3 py-2">專案作品集</a>
+          <a href="#blog" class="text-slate-300 hover:text-brand-400 transition-colors px-3 py-2">技術觀點</a>
+          <a href="#contact" class="text-slate-300 hover:text-brand-400 transition-colors px-3 py-2">聯絡我</a>
+        </nav>
+
+        <!-- Right Action Button -->
+        <div class="hidden md:flex items-center gap-3">
+          <button onclick="downloadResume()" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-brand-600 to-cyan-600 hover:from-brand-500 hover:to-cyan-500 text-white shadow-md shadow-brand-500/20 transition-all hover:scale-105">
+            <i class="fa-solid fa-file-arrow-down"></i> 下載完整履歷
+          </button>
+        </div>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobileMenuBtn" aria-label="Toggle menu" class="md:hidden text-slate-300 hover:text-white p-2">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-6 py-4 space-y-3">
+      <a href="#home" class="block text-slate-300 hover:text-brand-400 py-1" onclick="toggleMobileMenu()">首頁</a>
+      <a href="#about" class="block text-slate-300 hover:text-brand-400 py-1" onclick="toggleMobileMenu()">關於我</a>
+      <a href="#solutions" class="block text-slate-300 hover:text-brand-400 py-1" onclick="toggleMobileMenu()">數據解決方案</a>
+      <a href="#portfolio" class="block text-slate-300 hover:text-brand-400 py-1" onclick="toggleMobileMenu()">專案作品集</a>
+      <a href="#blog" class="block text-slate-300 hover:text-brand-400 py-1" onclick="toggleMobileMenu()">技術觀點</a>
+      <a href="#contact" class="block text-slate-300 hover:text-brand-400 py-1" onclick="toggleMobileMenu()">聯絡我</a>
+      <button onclick="downloadResume()" class="w-full text-center py-2.5 rounded-lg bg-brand-600 text-white text-sm font-semibold mt-2">
+        <i class="fa-solid fa-file-arrow-down mr-1"></i> 下載完整履歷
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden hero-glow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <!-- Status Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            國立暨南國際大學 財務金融研究所碩二 ｜ 積極尋找實習與專案合作
+          </div>
+
+          <!-- Main Catchphrase -->
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            用金融專業洞察數據，<br class="hidden sm:inline">
+            以<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-cyan-400 to-emerald-400">科技工具創造商業價值</span>
+          </h1>
+
+          <!-- Self Description -->
+          <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            您好，我是 <strong class="text-slate-200">陳婷</strong>。專注於財務報表深度剖析與企業營運競爭力研究，並結合 <span class="text-brand-400 font-mono">Python、SQL 與網頁開發</span>，將枯燥冰冷的財務指標轉化為能指導決策的視覺化洞察。
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#portfolio" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-cyan-600 hover:from-brand-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 transition-all hover:-translate-y-0.5 flex items-center gap-2">
+              <i class="fa-solid fa-chart-line"></i> 瀏覽專案與實戰案例
+            </a>
+            <a href="#about" class="px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold text-sm border border-slate-700 transition-all flex items-center gap-2">
+              <i class="fa-solid fa-user-astronaut"></i> 認識陳婷
+            </a>
+            <a href="#contact" class="px-4 py-3 rounded-xl text-slate-400 hover:text-brand-400 text-sm font-semibold transition-colors flex items-center gap-1.5">
+              <span>聯繫安排面試</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Mini Skill Tags -->
+          <div class="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs text-slate-400 font-mono">
+            <span class="text-slate-500">核心能力：</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-700/60">財務報表分析 (杜邦模型)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-700/60">Python (Pandas / Matplotlib)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-700/60">SQL 資料庫查詢</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/60 border border-slate-700/60">JavaScript 前端開發</span>
+          </div>
+        </div>
+
+        <!-- Right Hero Interactive Badge Card -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md">
+            <!-- Ambient Glow -->
+            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-brand-500 to-cyan-500 opacity-25 blur-xl"></div>
+            
+            <div class="relative rounded-2xl glass p-6 md:p-8 space-y-6 shadow-2xl">
+              <!-- Card Header -->
+              <div class="flex items-center justify-between pb-4 border-b border-slate-700/60">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-300 font-bold text-xl">
+                    婷
+                  </div>
+                  <div>
+                    <h3 class="text-white font-bold">學術與專業背景亮點</h3>
+                    <p class="text-xs text-slate-400">暨大財金所 · 跨領域FinTech人才</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  書卷獎得主
+                </span>
+              </div>
+
+              <!-- Quick Metric Stats -->
+              <div class="grid grid-cols-2 gap-4">
+                <div class="p-3.5 rounded-xl bg-slate-800/50 border border-slate-700/50">
+                  <div class="text-2xl font-black text-brand-400 font-mono">Top 3</div>
+                  <div class="text-xs text-slate-400 mt-1">系排名第 3 名 (書卷獎)</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-800/50 border border-slate-700/50">
+                  <div class="text-2xl font-black text-cyan-400 font-mono">2+</div>
+                  <div class="text-xs text-slate-400 mt-1">金融法定專業證照</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-800/50 border border-slate-700/50">
+                  <div class="text-2xl font-black text-emerald-400 font-mono">2 場</div>
+                  <div class="text-xs text-slate-400 mt-1">全國證券投資競賽經驗</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-slate-800/50 border border-slate-700/50">
+                  <div class="text-2xl font-black text-purple-400 font-mono">4+ 種</div>
+                  <div class="text-xs text-slate-400 mt-1">跨領域第一線實務歷練</div>
+                </div>
+              </div>
+
+              <!-- Key Quote Banner -->
+              <div class="p-3.5 rounded-xl bg-gradient-to-r from-brand-950/60 to-slate-900 border border-brand-800/40 text-xs text-slate-300 italic">
+                <i class="fa-solid fa-quote-left text-brand-500 mr-1.5"></i>
+                「不只是看見報表數字，更能發掘數據背後的商業契機與決策價值。」
+              </div>
+
+              <!-- Action Links -->
+              <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+                <span><i class="fa-solid fa-envelope text-slate-500 mr-1"></i> tingchen.finance@example.com</span>
+                <span class="text-brand-400"><i class="fa-solid fa-location-dot mr-1"></i> 台灣 · 可配合實習出勤</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights Bar -->
+  <section class="border-y border-slate-800 bg-slate-900/60 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="space-y-1">
+          <div class="text-slate-400 text-xs uppercase tracking-wider">最高學術榮譽</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-white">系排前 3 · 書卷獎</div>
+          <p class="text-xs text-slate-500">暨大財金所嚴謹學術訓練</p>
+        </div>
+        <div class="space-y-1 border-l border-slate-800">
+          <div class="text-slate-400 text-xs uppercase tracking-wider">金融法規與業務</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-white">證券商 & 信託證照</div>
+          <p class="text-xs text-slate-500">具備法規與市場操作合規性</p>
+        </div>
+        <div class="space-y-1 border-l border-slate-800">
+          <div class="text-slate-400 text-xs uppercase tracking-wider">實務個案拆解</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-white">和泰車 vs 裕隆</div>
+          <p class="text-xs text-slate-500">杜邦模型與電動車轉型剖析</p>
+        </div>
+        <div class="space-y-1 border-l border-slate-800">
+          <div class="text-slate-400 text-xs uppercase tracking-wider">跨界軟實力</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-white">排球隊 & 電吉他手</div>
+          <p class="text-xs text-slate-500">卓越抗壓、團隊溝通與節奏感</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Title Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-brand-400 font-mono text-xs uppercase tracking-widest mb-2 font-semibold">ABOUT ME</div>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">關於陳婷 ｜ 跨越金融與科技的分析新星</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-cyan-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- Left: Personal Narrative & Philosophy (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="glass p-8 rounded-2xl border border-slate-800 space-y-5">
+            <h3 class="text-xl font-bold text-white flex items-center gap-2.5">
+              <i class="fa-solid fa-compass text-brand-400"></i>
+              個人自述：以數據建立洞察，以科技轉化決策
+            </h3>
+            
+            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+              我是陳婷，目前就讀於<strong>國立暨南國際大學財務金融研究所碩二</strong>。我的專業背景以財務金融為核心，並積極跨足資料分析與網頁技術，期望將金融知識與科技工具結合，從數據中發掘問題、建立洞察，並將分析結果轉化為具有實際價值的決策資訊。
+            </p>
+
+            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+              在研究所修習歷程中，我扎實完成<em>財務報表分析、財務軟體應用、Python在財金領域應用及JavaScript網頁程式設計</em>等跨域課程，逐步建立從「理解財務資訊」到「運用科技分析資料」的完整思維閉環。
+            </p>
+
+            <!-- Detailed Case Mention -->
+            <div class="p-4 rounded-xl bg-slate-800/70 border-l-4 border-brand-500 text-sm text-slate-300 space-y-2">
+              <span class="font-semibold text-brand-300">重點研究經歷：</span>
+              曾深入剖析<strong>和泰車（2207）與裕隆（2201）</strong>的財務報表，從五大財務比率、杜邦分析拆解、營運週轉天數到面對新能源電動車轉型的資本支出配置，淬鍊出從客觀數字掌握實體企業體質與市場競爭優勢的直覺與能力。
+            </div>
+
+            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+              除了課堂上的理論與技術，我也極為重視現場實務所帶來的<strong>溝通、細心與抗壓性</strong>。求學期間曾於<em>餐廳、咖啡廳、露營區與茶廠</em>等多工種環境工讀，從顧客接待、內場協作到庫存管理，鍛鍊出在未知環境下迅速適應、冷靜排解問題的團隊實踐力。
+            </p>
+
+            <div class="pt-2 flex flex-wrap gap-2 text-xs">
+              <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300"><i class="fa-solid fa-award text-yellow-400 mr-1"></i> 書卷獎 (系排第 3)</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300"><i class="fa-solid fa-certificate text-cyan-400 mr-1"></i> 證券商業務員</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300"><i class="fa-solid fa-certificate text-cyan-400 mr-1"></i> 信託業業務人員</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300"><i class="fa-solid fa-trophy text-amber-400 mr-1"></i> 證券投資智慧王參賽</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300"><i class="fa-solid fa-guitar text-pink-400 mr-1"></i> 熱音社電吉他手</span>
+              <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300"><i class="fa-solid fa-volleyball text-emerald-400 mr-1"></i> 系排球隊成員</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Experience & Skills Tabs (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Tab Navigation -->
+          <div class="flex p-1 bg-slate-800/80 rounded-xl border border-slate-700">
+            <button onclick="switchTab('skills')" id="tabBtnSkills" class="flex-1 py-2 text-xs font-semibold rounded-lg bg-brand-600 text-white transition-all">
+              <i class="fa-solid fa-microchip mr-1"></i> 專業技能庫
+            </button>
+            <button onclick="switchTab('timeline')" id="tabBtnTimeline" class="flex-1 py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all">
+              <i class="fa-solid fa-clock-rotate-left mr-1"></i> 歷練時間軸
+            </button>
+          </div>
+
+          <!-- Tab Content 1: Skills -->
+          <div id="tabContentSkills" class="glass p-6 rounded-2xl border border-slate-800 space-y-5">
+            <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-layer-group text-brand-400"></i> 工具與核心能力熟練度
+            </h4>
+
+            <!-- Skill 1 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs font-medium">
+                <span class="text-slate-200">財務報表分析 (杜邦模型 / 評價)</span>
+                <span class="text-brand-400 font-mono">92%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-500 to-cyan-400 h-full rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+
+            <!-- Skill 2 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs font-medium">
+                <span class="text-slate-200">Python 數據分析 (Pandas / Numpy / Requests)</span>
+                <span class="text-brand-400 font-mono">85%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-500 to-cyan-400 h-full rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+
+            <!-- Skill 3 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs font-medium">
+                <span class="text-slate-200">SQL 資料庫查詢 (關聯篩選 / 報表整合)</span>
+                <span class="text-brand-400 font-mono">80%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-500 to-cyan-400 h-full rounded-full" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <!-- Skill 4 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs font-medium">
+                <span class="text-slate-200">前端網頁開發 (HTML5 / Tailwind / JavaScript)</span>
+                <span class="text-brand-400 font-mono">75%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-500 to-cyan-400 h-full rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+
+            <!-- Skill 5 -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs font-medium">
+                <span class="text-slate-200">商業試算表 (Excel 樞紐分析 / 財務函數建模)</span>
+                <span class="text-brand-400 font-mono">90%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-500 to-cyan-400 h-full rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-slate-700/60 text-xs text-slate-400">
+              <i class="fa-solid fa-circle-check text-brand-400 mr-1.5"></i>
+              能自主撰寫爬蟲腳本批次抓取公開資訊觀測站數據，並於前端快速渲染成視覺化圖表。
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Timeline -->
+          <div id="tabContentTimeline" class="glass p-6 rounded-2xl border border-slate-800 space-y-4 hidden">
+            <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-route text-cyan-400"></i> 求學、實戰與跨界成長軌跡
+            </h4>
+
+            <div class="relative border-l border-slate-700 ml-3 pl-4 space-y-5 text-xs">
+              
+              <!-- Item 1 -->
+              <div class="relative">
+                <div class="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-brand-400 ring-4 ring-slate-900"></div>
+                <div class="font-bold text-white text-sm">國立暨南國際大學 財金所碩二</div>
+                <div class="text-brand-300 font-mono">2023 - 至今</div>
+                <p class="text-slate-400 mt-1">專研財報分析、Python 金融實戰、榮獲書卷獎（系排第3名）。</p>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="relative">
+                <div class="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-cyan-400 ring-4 ring-slate-900"></div>
+                <div class="font-bold text-white text-sm">全國證券投資競賽實戰</div>
+                <div class="text-slate-400 font-mono">投資智慧王 · 股市金字塔</div>
+                <p class="text-slate-400 mt-1">獨立進行總經數據推演、產業個股篩選與回測驗證。</p>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="relative">
+                <div class="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-4 ring-slate-900"></div>
+                <div class="font-bold text-white text-sm">多元實務工作經歷</div>
+                <div class="text-slate-400 font-mono">餐廳 / 咖啡廳 / 露營區 / 茶廠</div>
+                <p class="text-slate-400 mt-1">第一線顧客服務與現場協同，淬鍊極高抗壓性、細心度與靈活溝通力。</p>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="relative">
+                <div class="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-purple-400 ring-4 ring-slate-900"></div>
+                <div class="font-bold text-white text-sm">課外自律與團隊精神</div>
+                <div class="text-slate-400 font-mono">系排球隊 · 熱音社電吉他手</div>
+                <p class="text-slate-400 mt-1">藉由節奏練習磨練耐心專注，球場默契培養團隊共同進退之戰術韌性。</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AI & Data Solutions Section -->
+  <section id="solutions" class="py-24 bg-slate-900/70 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-cyan-400 font-mono text-xs uppercase tracking-widest mb-2 font-semibold">AI & DATA SOLUTIONS</div>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">以技術驅動的金融分析服務</h2>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">
+          將研究生嚴謹的財務建模邏輯，封裝為現代化的數據處理工具與可視化系統，助力提升決策效率。
+        </p>
+        <div class="w-16 h-1 bg-gradient-to-r from-cyan-500 to-brand-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Solution 1 -->
+        <div class="glass p-8 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all hover:-translate-y-1 space-y-4 group">
+          <div class="w-14 h-14 rounded-2xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-400 text-2xl group-hover:bg-brand-500 group-hover:text-white transition-all shadow-lg shadow-brand-500/10">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">財報數據自動化處理管線</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            透過 Python 結合 SQL，自動化串接公開資訊觀測站（MOPS）及市場 API，進行資產負債表、損益表、現金流量表清洗與杜邦三因子拆解，替代 80% 的人工整理工作。
+          </p>
+          <ul class="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> 自動下載標準格式財務季報</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> 異常數值檢查與格式統一清洗</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> SQLite / PostgreSQL 結構化儲存</li>
+          </ul>
+        </div>
+
+        <!-- Solution 2 -->
+        <div class="glass p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all hover:-translate-y-1 space-y-4 group">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg shadow-cyan-500/10">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">互動式財務比率儀表板</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            運用 HTML、CSS、JavaScript 與 Chart.js 建構響應式財務看板。直觀比較競爭對手之營運毛利率、存貨週轉天數、長短期償債能力，讓數據一目了然。
+          </p>
+          <ul class="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> 杜邦分析樹狀因子動態連動</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> 同產業龍頭跨期指標雷達圖</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> 支援手機與平板端自適應檢視</li>
+          </ul>
+        </div>
+
+        <!-- Solution 3 -->
+        <div class="glass p-8 rounded-2xl border border-slate-800 hover:border-purple-500/50 transition-all hover:-translate-y-1 space-y-4 group">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all shadow-lg shadow-purple-500/10">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">AI 研報重點摘要與輔助分析</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            整合大型語言模型（LLM）與自然語言處理技術，設計結構化 Prompt 自動摘要法說會逐字稿、提煉管理階層對未來展望（Guidance）之市場情緒與風險預警。
+          </p>
+          <ul class="text-xs text-slate-300 space-y-2 pt-2 border-t border-slate-800">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> 法說會重點摘要與問答整理</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> 經營階層語氣情緒指標評估</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> 快速生成標準化研究簡報草稿</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Solution Delivery Workflow Banner -->
+      <div class="mt-12 glass p-6 rounded-2xl border border-slate-800">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div class="space-y-1">
+            <div class="text-xs font-mono text-brand-400 font-bold uppercase tracking-wider">WORKFLOW</div>
+            <h4 class="text-lg font-bold text-white">完整分析實踐閉環：從原始數據到決策建議</h4>
+            <p class="text-xs text-slate-400">定義商業痛點 ➔ 數據清洗與指標建模 ➔ 視覺化看板 ➔ 撰寫研究策略報告</p>
+          </div>
+          <a href="#contact" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs border border-slate-700 transition-all flex items-center gap-2 shrink-0">
+            <span>探討如何為團隊賦能</span> <i class="fa-solid fa-arrow-right text-brand-400"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Portfolio & Case Studies Section -->
+  <section id="portfolio" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="text-brand-400 font-mono text-xs uppercase tracking-widest mb-2 font-semibold">PORTFOLIO & CASE STUDIES</div>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">精選專案與實戰研究案例</h2>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">
+          以 STAR 原則展現問題解決能力，呈現從扎實財報分析到程式化應用的具體成果。
+        </p>
+        <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-cyan-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <button onclick="filterPortfolio('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-white transition-all shadow-md">
+          全部專案 (3)
+        </button>
+        <button onclick="filterPortfolio('finance')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-400 hover:text-white transition-all">
+          財務報表分析 (1)
+        </button>
+        <button onclick="filterPortfolio('tech')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-400 hover:text-white transition-all">
+          Python / 數據工具 (1)
+        </button>
+        <button onclick="filterPortfolio('contest')" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-400 hover:text-white transition-all">
+          投資競賽策略 (1)
+        </button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Case 1: 和泰車 vs 裕隆 (FLAGSHIP CASE) -->
+        <div class="portfolio-item group glass rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between" data-category="finance">
+          <div>
+            <!-- Header Tag & Visual Preview -->
+            <div class="p-6 bg-gradient-to-b from-slate-800/80 to-slate-900/40 border-b border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-1 rounded text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <i class="fa-solid fa-star mr-1"></i> 旗艦研究個案
+                </span>
+                <span class="text-xs text-slate-400 font-mono">財務報表分析</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">
+                和泰車 (2207) vs. 裕隆 (2201) 財報與產業競爭力深度對比
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                運用五大財務比率與杜邦分析拆解台灣車市兩大巨頭，探討其在燃油車銷售霸主與新能源轉型路徑下的獲利質量。
+              </p>
+            </div>
+
+            <!-- Interactive Chart Preview inside Card -->
+            <div class="p-5 space-y-3">
+              <div class="text-[11px] text-slate-400 flex items-center justify-between font-mono">
+                <span>杜邦分析核心指標對比 (ROE Decomposition)</span>
+                <span class="text-brand-400">2023-2024 近期指標</span>
+              </div>
+              <!-- Mini Canvas for DuPont Ratio Comparison -->
+              <div class="h-44 w-full bg-slate-900/60 rounded-xl p-2 border border-slate-800">
+                <canvas id="dupontChart"></canvas>
+              </div>
+              
+              <!-- Quick Key Findings -->
+              <div class="space-y-1.5 text-xs text-slate-300 pt-2">
+                <div class="flex items-start gap-1.5">
+                  <i class="fa-solid fa-circle-check text-brand-400 text-[10px] mt-1 shrink-0"></i>
+                  <span><strong>和泰車</strong>：受惠高資產週轉率與強大經銷體系，ROE表現亮眼。</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <i class="fa-solid fa-circle-check text-cyan-400 text-[10px] mt-1 shrink-0"></i>
+                  <span><strong>裕隆</strong>：資產活化與電動車（鴻華先進）合資布局，具中長期轉機彈性。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Footer Action -->
+          <div class="p-5 border-t border-slate-800 bg-slate-900/40">
+            <button onclick="openModal('case-dupont')" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-brand-600 text-white text-xs font-semibold transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-lines"></i> 閱讀完整 STAR 研究剖析
+            </button>
+          </div>
+        </div>
+
+        <!-- Case 2: Python Financial Crawler & Monitor Tool -->
+        <div class="portfolio-item group glass rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between" data-category="tech">
+          <div>
+            <!-- Header Tag -->
+            <div class="p-6 bg-gradient-to-b from-slate-800/80 to-slate-900/40 border-b border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-1 rounded text-[11px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                  <i class="fa-brands fa-python mr-1"></i> Python 數據工具
+                </span>
+                <span class="text-xs text-slate-400 font-mono">自動化程式</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                台股三大法人籌碼與市場指標自動化監控管線
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                以 Requests 串接證交所 API，整合 SQLite 儲存庫與自動警示，解決每日手動查詢整理工時耗損。
+              </p>
+            </div>
+
+            <!-- Code Preview Block -->
+            <div class="p-5 space-y-3">
+              <div class="text-[11px] text-slate-400 flex items-center justify-between font-mono">
+                <span>自動化代碼邏輯 (Code Snippet)</span>
+                <span class="text-cyan-400">clean_pipeline.py</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-[11px] font-mono text-slate-300 overflow-x-auto space-y-1">
+                <div><span class="text-purple-400">import</span> pandas <span class="text-purple-400">as</span> pd</div>
+                <div><span class="text-purple-400">import</span> sqlite3, requests</div>
+                <div class="text-slate-500"># 抓取並計算外資/投信持股比例變動</div>
+                <div><span class="text-blue-400">def</span> <span class="text-yellow-300">fetch_institutional</span>(date):</div>
+                <div class="pl-4">df = pd.DataFrame(data[<span class="text-emerald-400">'data'</span>])</div>
+                <div class="pl-4">df[<span class="text-emerald-400">'net_buy'</span>] = df[<span class="text-emerald-400">'buy'</span>] - df[<span class="text-emerald-400">'sell'</span>]</div>
+                <div class="pl-4"><span class="text-purple-400">return</span> df.sort_values(by=<span class="text-emerald-400">'net_buy'</span>)</div>
+              </div>
+
+              <div class="space-y-1.5 text-xs text-slate-300 pt-2">
+                <div class="flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-cyan-400 text-[10px] mt-1 shrink-0"></i>
+                  <span>省去 90% 盤後手動下載繁瑣工作，確保數據留存完整。</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-cyan-400 text-[10px] mt-1 shrink-0"></i>
+                  <span>自動輸出 Excel 每日摘要圖表供內部研究參考。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 border-t border-slate-800 bg-slate-900/40">
+            <button onclick="openModal('case-python')" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-cyan-600 text-white text-xs font-semibold transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-code"></i> 查看系統架構與實作詳情
+            </button>
+          </div>
+        </div>
+
+        <!-- Case 3: Securities Competition Strategy Review -->
+        <div class="portfolio-item group glass rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between" data-category="contest">
+          <div>
+            <!-- Header Tag -->
+            <div class="p-6 bg-gradient-to-b from-slate-800/80 to-slate-900/40 border-b border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-1 rounded text-[11px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  <i class="fa-solid fa-trophy mr-1"></i> 競賽實戰覆盤
+                </span>
+                <span class="text-xs text-slate-400 font-mono">投資分析</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">
+                證券投資智慧王 & 股市金字塔競賽 策略實證覆盤
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                將總體經濟指標（通膨、升降息循環）與產業價值鏈結合，進行個股篩選與動態風險分散管理。
+              </p>
+            </div>
+
+            <!-- Content preview -->
+            <div class="p-5 space-y-3">
+              <div class="text-[11px] text-slate-400 flex items-center justify-between font-mono">
+                <span>策略核心原則 (Strategy Pillars)</span>
+                <span class="text-purple-400">Risk vs. Alpha</span>
+              </div>
+
+              <!-- Metrics cards -->
+              <div class="grid grid-cols-2 gap-2 text-center">
+                <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                  <div class="text-slate-400 text-[10px]">選股濾網</div>
+                  <div class="text-sm font-bold text-white mt-1">連續 3 年 ROE > 15%</div>
+                </div>
+                <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                  <div class="text-slate-400 text-[10px]">停損控制</div>
+                  <div class="text-sm font-bold text-purple-400 mt-1">單筆最大虧損 7%</div>
+                </div>
+              </div>
+
+              <div class="space-y-1.5 text-xs text-slate-300 pt-2">
+                <div class="flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-purple-400 text-[10px] mt-1 shrink-0"></i>
+                  <span>培養在盤勢波動下的獨立客觀思考與情緒自律。</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-purple-400 text-[10px] mt-1 shrink-0"></i>
+                  <span>將書本評價模型（DCF / 本益比河流圖）落實於實時行情中。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 border-t border-slate-800 bg-slate-900/40">
+            <button onclick="openModal('case-contest')" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-purple-600 text-white text-xs font-semibold transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-chart-column"></i> 查看競賽反思與策略總結
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Blog & Insights Section -->
+  <section id="blog" class="py-24 bg-slate-900/70 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-brand-400 font-mono text-xs uppercase tracking-widest mb-2 font-semibold">TECH & FINANCE BLOG</div>
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">財金洞察與技術手記</h2>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">
+          持續記錄學習思考，融合產業基本面探討、數據分析實作與跨領域歷練心態。
+        </p>
+        <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-cyan-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Post 1 -->
+        <article class="glass rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-brand-500/50 transition-all hover:-translate-y-1 group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-300 font-medium"># 財報剖析</span>
+              <span class="text-slate-500 font-mono">6 分鐘閱讀</span>
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">
+              從和泰車與裕隆的存貨與週轉天數，看台灣車市供應鏈的關鍵變化
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3">
+              存貨週轉率是檢視汽車製造與代理商營運資金效率的照妖鏡。本文透過杜邦分析的第二個因子（資產週轉率），細究兩大車廠在疫後供應鏈重整與缺料緩解後的財務現狀。
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800/80 mt-4 flex items-center justify-between">
+            <span class="text-slate-500 text-xs">發表於 研究手記</span>
+            <button onclick="openBlogModal('post-1')" class="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1">
+              閱讀全文 <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="glass rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-cyan-500/50 transition-all hover:-translate-y-1 group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 font-medium"># Python 實務</span>
+              <span class="text-slate-500 font-mono">8 分鐘閱讀</span>
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              財金所研究生的實用技能：如何用 50 行 Python 程式碼整理公開觀測站財報
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3">
+              手動複製貼上財報既耗時又容易出錯。本文示範如何善用 Requests 與 Pandas 清洗 HTML 表格結構，快速產出乾淨且能直接輸入回測模型的結構化 CSV。
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800/80 mt-4 flex items-center justify-between">
+            <span class="text-slate-500 text-xs">發表於 數據工具</span>
+            <button onclick="openBlogModal('post-2')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+              閱讀全文 <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="glass rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-purple-500/50 transition-all hover:-translate-y-1 group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-300 font-medium"># 跨界思維</span>
+              <span class="text-slate-500 font-mono">5 分鐘閱讀</span>
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">
+              電吉他、排球與財報：非典型工讀經歷如何鍛鍊出我的商業敏銳度
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3">
+              在茶廠包裝與咖啡廳面對多工時的抗壓，讓我在面對龐雜財務數據時更有耐心。從樂團節奏到系排球隊的戰術跑位，分享如何將生活歷練轉化為職場的核心軟實力。
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800/80 mt-4 flex items-center justify-between">
+            <span class="text-slate-500 text-xs">發表於 職涯反思</span>
+            <button onclick="openBlogModal('post-3')" class="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1">
+              閱讀全文 <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Me Section -->
+  <section id="contact" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left Contact Information (5 cols) -->
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <div class="text-brand-400 font-mono text-xs uppercase tracking-widest mb-2 font-semibold">GET IN TOUCH</div>
+            <h2 class="text-3xl font-bold text-white sm:text-4xl">聯繫陳婷</h2>
+            <div class="w-16 h-1 bg-brand-500 mt-4 rounded-full"></div>
+            <p class="text-slate-400 text-sm mt-4 leading-relaxed">
+              目前正積極尋找<strong>金融研究、風控分析、商業/數據分析（BA/DA）及 FinTech 相關實習或正職機會</strong>。如果您有任何面試邀約、專案合作或技術交流，非常歡迎與我聯繫！
+            </p>
+          </div>
+
+          <!-- Contact Channels List -->
+          <div class="space-y-4 text-sm">
+            <div class="flex items-center gap-4 p-4 rounded-xl glass border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400">電子信箱 (Email)</div>
+                <div class="text-white font-mono font-medium">tingchen.finance@example.com</div>
+              </div>
+              <button onclick="copyEmail()" class="text-slate-400 hover:text-white text-xs px-2.5 py-1.5 rounded bg-slate-800 hover:bg-slate-700 transition-colors" title="複製信箱">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl glass border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400">LinkedIn 個人檔案</div>
+                <a href="https://linkedin.com" target="_blank" class="text-white hover:text-cyan-400 font-medium transition-colors">
+                  linkedin.com/in/ting-chen-finance
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl glass border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-slate-700/40 text-slate-300 flex items-center justify-center shrink-0">
+                <i class="fa-brands fa-github"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400">GitHub 專案原始碼</div>
+                <a href="https://github.com" target="_blank" class="text-white hover:text-brand-400 font-mono transition-colors">
+                  github.com/tingchen-fin
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl glass border border-slate-800">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400">目前所在地 & 出勤偏好</div>
+                <div class="text-white font-medium">台灣 · 可彈性配合台北/台中通勤或遠端實習</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Contact Form (7 cols) -->
+        <div class="lg:col-span-7">
+          <div class="glass p-8 sm:p-10 rounded-2xl border border-slate-800 shadow-xl relative">
+            <h3 class="text-xl font-bold text-white mb-2">發送面試邀約或訊息</h3>
+            <p class="text-xs text-slate-400 mb-6">填寫以下表單，我將於 24 小時內儘速以 Email 回覆您！</p>
+
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4 text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">您的姓名 / 稱謂 <span class="text-rose-400">*</span></label>
+                  <input type="text" id="formName" required placeholder="例如：李先生 / 陳主管" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white placeholder-slate-500 outline-none text-xs transition-colors">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">所屬機構 / 公司名稱 <span class="text-rose-400">*</span></label>
+                  <input type="text" id="formOrg" required placeholder="例如：某金控 / 科技公司 HR" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white placeholder-slate-500 outline-none text-xs transition-colors">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">電子信箱 <span class="text-rose-400">*</span></label>
+                  <input type="email" id="formEmail" required placeholder="name@company.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white placeholder-slate-500 outline-none text-xs transition-colors">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">洽詢類型</label>
+                  <select id="formType" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white outline-none text-xs transition-colors">
+                    <option value="實習面試邀約">實習面試邀約 (Internship)</option>
+                    <option value="正職工作機會">正職工作機會 (Full-time)</option>
+                    <option value="專案合作洽詢">專案/數據合作洽詢</option>
+                    <option value="交流討論">學術/技術交流</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1.5">詳細訊息內容 <span class="text-rose-400">*</span></label>
+                <textarea id="formMessage" required rows="4" placeholder="請簡述您的職缺需求、面試時間安排或想交流的題目..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white placeholder-slate-500 outline-none text-xs transition-colors resize-none"></textarea>
+              </div>
+
+              <button type="submit" id="submitBtn" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-brand-600 to-cyan-600 hover:from-brand-500 hover:to-cyan-500 text-white font-semibold text-xs tracking-wide transition-all shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> 立即發送訊息
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-[#070b14] py-12 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-xs">
+            TC
+          </div>
+          <div>
+            <div class="text-white font-semibold">陳婷 Ting Chen</div>
+            <div class="text-slate-500 text-[11px]">國立暨南國際大學 財務金融研究所</div>
+          </div>
+        </div>
+
+        <div class="text-center md:text-right">
+          <p>© 2026 陳婷 (Ting Chen). All rights reserved.</p>
+          <p class="text-slate-600 text-[10px] mt-1">用心打造 · 兼具金融洞察力與數據實踐力的個人品牌空間</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Window Component (Shared for Case Studies & Blogs) -->
+  <div id="infoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+        <div id="modalHeaderContent">
+          <!-- Injected dynamically -->
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div id="modalBodyContent" class="p-6 sm:p-8 overflow-y-auto space-y-4 text-slate-300 text-sm leading-relaxed">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between text-xs">
+        <span class="text-slate-500 font-mono">Ting Chen Portfolio Viewer</span>
+        <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+          關閉視窗
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="glass px-5 py-3 rounded-xl border border-brand-500/40 text-white text-xs flex items-center gap-3 shadow-xl shadow-black/50">
+      <div id="toastIcon" class="text-emerald-400 text-sm"><i class="fa-solid fa-circle-check"></i></div>
+      <div id="toastMessage">操作成功！</div>
+    </div>
+  </div>
+
+  <script>
+    // --- Mobile Menu Toggle ---
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+    // --- Tab Switching in About Section ---
+    function switchTab(tab) {
+      const btnSkills = document.getElementById('tabBtnSkills');
+      const btnTimeline = document.getElementById('tabBtnTimeline');
+      const contentSkills = document.getElementById('tabContentSkills');
+      const contentTimeline = document.getElementById('tabContentTimeline');
+
+      if (tab === 'skills') {
+        btnSkills.className = "flex-1 py-2 text-xs font-semibold rounded-lg bg-brand-600 text-white transition-all";
+        btnTimeline.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+        contentSkills.classList.remove('hidden');
+        contentTimeline.classList.add('hidden');
+      } else {
+        btnTimeline.className = "flex-1 py-2 text-xs font-semibold rounded-lg bg-cyan-600 text-white transition-all";
+        btnSkills.className = "flex-1 py-2 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+        contentTimeline.classList.remove('hidden');
+        contentSkills.classList.add('hidden');
+      }
+    }
+
+    // --- Portfolio Category Filter ---
+    function filterPortfolio(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-brand-600', 'text-white');
+        btn.classList.add('bg-slate-800/80', 'text-slate-400');
+      });
+      event.target.classList.remove('bg-slate-800/80', 'text-slate-400');
+      event.target.classList.add('bg-brand-600', 'text-white');
+
+      const items = document.querySelectorAll('.portfolio-item');
+      items.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- Toast Notification Helper ---
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMessage.textContent = message;
+      if (isError) {
+        toastIcon.innerHTML = '<i class="fa-solid fa-circle-exclamation text-rose-400"></i>';
+      } else {
+        toastIcon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    // --- Copy Email to Clipboard ---
+    function copyEmail() {
+      const email = 'tingchen.finance@example.com';
+      const tempInput = document.createElement('input');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast('已複製陳婷的 Email 至剪貼簿！');
+    }
+
+    // --- Fake Resume Download Trigger ---
+    function downloadResume() {
+      showToast('正在準備履歷 PDF 下載檔案，敬請稍候...');
+      setTimeout(() => {
+        showToast('履歷文件下載完成（模擬）！歡迎隨時聯絡陳婷。');
+      }, 1500);
+    }
+
+    // --- Contact Form Submission Handler ---
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const name = document.getElementById('formName').value;
+      const org = document.getElementById('formOrg').value;
+      const type = document.getElementById('formType').value;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> 訊息傳送中...';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane mr-1"></i> 立即發送訊息';
+        document.getElementById('contactForm').reset();
+        showToast(`謝謝 ${org} 的 ${name}！已收到您的「${type}」訊息，我將儘速回信！`);
+      }, 1200);
+    }
+
+    // --- Case Study & Blog Modal Logic ---
+    const modalData = {
+      'case-dupont': {
+        tag: '財務報表分析 · 旗艦個案',
+        title: '和泰車 (2207) vs. 裕隆 (2201) 財報與產業競爭力深度研究 (STAR 框架)',
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【S - 情境 Situation】</h4>
+              <p class="text-xs text-slate-300">
+                汽車產業面臨全球燃油車供應鏈重組及新能源電動車（EV）的全面轉型浪潮。和泰車為台灣汽車代理龍頭（Toyota/Lexus），而裕隆具備自主研發、組裝製造及海外轉投資經驗。兩者在商業模式上存在顯著差異，需藉由財務數據剖析雙方的經營風險與韌性。
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【T - 任務 Task】</h4>
+              <p class="text-xs text-slate-300">
+                運用五大財務比率（獲利性、償債能力、營運能力、財務結構、成長率）與杜邦三因子拆解（淨利率 × 資產週轉率 × 權益乘數），驗證「高週轉率輕資產經銷模式」與「重資產製造投資模式」在經濟震盪下的 ROE 敏感度。
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【A - 行動 Action】</h4>
+              <ul class="text-xs text-slate-300 list-disc list-inside space-y-1">
+                <li>蒐集近五個會計年度之公開合併財務報表，以 Python 進行異常值清洗與標準化比率計算。</li>
+                <li>針對存貨週轉天數與應收帳款週轉率進行同業對照，揭示車市終端通路話語權。</li>
+                <li>深入解析裕隆對鴻華先進的研發資本支出對自由現金流（FCF）之影響，並檢視其短債壓力。</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-brand-500/50 bg-brand-950/20">
+              <h4 class="font-bold text-brand-300 text-base mb-1">【R - 結果與洞察 Result】</h4>
+              <p class="text-xs text-slate-300">
+                研究證實和泰車受惠於極高之資產週轉率（>1.1）與品牌溢價，享有更穩健的經營現金流入；裕隆則因製造資產折舊負擔大，短期 ROE 較具波動，但資產活化（新店裕隆城）與電動車代工布局提供了潛在的成長選擇權（Growth Options）。本報告獲指導教授高度評價，並成為後續財務分析教學參考範例。
+              </p>
+            </div>
+          </div>
+        `
+      },
+      'case-python': {
+        tag: 'Python / 數據工程實踐',
+        title: '台股三大法人籌碼與市場指標自動化監控管線 (STAR 框架)',
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【S - 情境 Situation】</h4>
+              <p class="text-xs text-slate-300">
+                在參與投資競賽與撰寫研報過程中，每日盤後需手動進入台灣證交所下載外資、投信與自營商的買賣超數據，步驟繁瑣且人工輸入極易產生錯誤。
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【T - 任務 Task】</h4>
+              <p class="text-xs text-slate-300">
+                設計一套全自動 Python 批次爬蟲管線，每天下午自動抓取公開資料、清洗後存入 SQLite 資料庫，並篩選連續 3 日法人同買之重點個股名單。
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【A - 行動 Action】</h4>
+              <p class="text-xs text-slate-300">
+                使用 Python Requests 與 BeautifulSoup 處理防爬機制與格式轉換；利用 Pandas 計算法人買賣超佔成交量比重；以 SQLite 建立索引資料庫加速查詢。
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-cyan-500/50 bg-cyan-950/20">
+              <h4 class="font-bold text-cyan-300 text-base mb-1">【R - 結果與成效 Result】</h4>
+              <p class="text-xs text-slate-300">
+                節省每日約 45 分鐘的手動查詢時間，並將資料庫串接至視覺化前端，協助團隊在開盤前 1 小時即掌握最新市場籌碼集中度。
+              </p>
+            </div>
+          </div>
+        `
+      },
+      'case-contest': {
+        tag: '實戰投資競賽',
+        title: '證券投資智慧王 & 股市金字塔競賽 策略實證覆盤',
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【S - 情境 Situation】</h4>
+              <p class="text-xs text-slate-300">
+                全國大專院校證券投資競賽匯集各校財金菁英，在高度擬真的市場環境下，要求參賽者在控制最大回撤（Max Drawdown）的前提下獲取超額報酬（Alpha）。
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【T - 任務 Task】</h4>
+              <p class="text-xs text-slate-300">
+                建立一套結合「由上而下（Top-Down）總體經濟脈絡」與「由下而上（Bottom-Up）財務比率篩選」的雙軌選股模型。
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+              <h4 class="font-bold text-white text-base mb-1">【A - 行動 Action】</h4>
+              <p class="text-xs text-slate-300">
+                透過總經指標研判升息尾聲資金回流科技股之趨勢，篩選營業利益率連續 4 季成長且負債比率小於 40% 的中小型半導體供應鏈；並嚴格落實 7% 動態停損點。
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/80 border border-purple-500/50 bg-purple-950/20">
+              <h4 class="font-bold text-purple-300 text-base mb-1">【R - 結果與心得 Result】</h4>
+              <p class="text-xs text-slate-300">
+                在震盪盤勢中有效規避單一重倉個股之系統性下跌風險，驗證了嚴格風險控管比盲目追求高報酬更能帶來長期穩定收益的金融法則。
+              </p>
+            </div>
+          </div>
+        `
+      },
+      'post-1': {
+        tag: '專欄文章 · 財報深度觀點',
+        title: '從和泰車與裕隆的存貨與週轉天數，看台灣車市供應鏈的關鍵變化',
+        content: `
+          <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+            <p>
+              在傳統財務報表分析中，<strong>存貨週轉天數（Days Sales of Inventory, DSI）</strong>往往被視為衡量企業營運資金調度效率的第一線指標。然而，在汽車產業中，這項指標不僅反映了終端銷售速度，更直接折射出車廠對於整體零組件供應鏈與經銷體系的議價能力。
+            </p>
+            <h4 class="text-white font-bold text-sm">一、和泰車的「精實經銷體系」效益</h4>
+            <p>
+              和泰車長期維持低於產業平均的週轉天數，核心原因在於豐田生產方式（TPS）延伸至銷售端的即時調配能力。經銷商的訂單需求能與母廠生產排程高度共振，降低了因滯銷而產生庫存跌價損失的風險。
+            </p>
+            <h4 class="text-white font-bold text-sm">二、裕隆面對電動車轉型的資本折衝</h4>
+            <p>
+              相較之下，裕隆在自有品牌與代工製造雙軌並行下，必須承擔較高的在製品（WIP）與模具固定資產成本。尤其在鴻華先進推展 EV 平台的過程中，早期的研發模組備料使得現金週轉循環（CCC）略微拉長。
+            </p>
+            <div class="p-3 rounded-lg bg-slate-800 border-l-2 border-brand-400 text-slate-300 italic">
+              「財務指標不是靜止的數字，而是企業在面對產業轉型與戰略抉擇時留下的足跡。」
+            </div>
+          </div>
+        `
+      },
+      'post-2': {
+        tag: '技術文章 · Python 實戰',
+        title: '財金所研究生的實用技能：如何用 50 行 Python 程式碼整理公開觀測站財報',
+        content: `
+          <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+            <p>
+              對於財金研究人員而言，資料收集往往佔據了 70% 的研究工時。公開資訊觀測站雖然資訊齊全，但歷史報表常散落在不同 HTML 表格中。透過 Python 的 Pandas 與 Requests，我們可以在數十秒內完成數年財報的擷取與清洗。
+            </p>
+            <h4 class="text-white font-bold text-sm">關鍵三步驟心法：</h4>
+            <ol class="list-decimal list-inside space-y-1.5">
+              <li><strong>拆解 URL 規律</strong>：分析 MOPS 各季度資產負債表的 POST 參數（年、季、公司代號）。</li>
+              <li><strong>善用 pd.read_html</strong>：直接解析伺服器回傳之 HTML Table，省去手動寫正則表達式的複雜度。</li>
+              <li><strong>欄位標準化與異常處理</strong>：處理會計項目名稱更替（如 IFRS 規範調整），統一建立主鍵索引以利後續 SQL 導入。</li>
+            </ol>
+            <p>
+              透過這樣的資料工程素養，財金分析師能將更多精力保留在「商業洞察」與「情境壓力測試」上。
+            </p>
+          </div>
+        `
+      },
+      'post-3': {
+        tag: '反思專欄 · 跨領域歷練',
+        title: '電吉他、排球與財報：非典型工讀經歷如何鍛鍊出我的商業敏銳度',
+        content: `
+          <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+            <p>
+              在撰寫履歷時，許多同學會猶豫是否該寫上餐廳、咖啡廳、露營區與茶廠的打工經歷，擔心這些與「高大上」的金融分析無關。然而對我而言，這些第一線的歷練，正是培養我<strong>「現場感知力」與「同理心」</strong>的關鍵搖籃。
+            </p>
+            <h4 class="text-white font-bold text-sm">1. 在茶廠與咖啡廳學會「細心與品質控制」</h4>
+            <p>
+              茶葉的烘焙包裝與咖啡品管不容許一絲馬虎，就如同財報報表中的每一個數字與附註揭露，細節決定了最終決策的精確度。
+            </p>
+            <h4 class="text-white font-bold text-sm">2. 在排球隊與熱音社領會「節奏與團隊互信」</h4>
+            <p>
+              擔任電吉他手需要日復一日孤獨而自律的節拍練習；而系排球隊的攔網與防守，考驗著與隊友在瞬息萬變中的默契。這讓我在面對繁重複雜的金融研究任務時，始終保持穩定心態與團隊合作彈性。
+            </p>
+          </div>
+        `
+      }
+    };
+
+    function openModal(caseKey) {
+      const data = modalData[caseKey];
+      if (!data) return;
+
+      document.getElementById('modalHeaderContent').innerHTML = `
+        <span class="text-xs font-mono text-brand-400 font-semibold uppercase tracking-wider block mb-1">${data.tag}</span>
+        <h3 class="text-lg font-bold text-white">${data.title}</h3>
+      `;
+      document.getElementById('modalBodyContent').innerHTML = data.content;
+
+      const modal = document.getElementById('infoModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openBlogModal(postKey) {
+      openModal(postKey);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('infoModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close modal on escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Close modal on background click
+    document.getElementById('infoModal').addEventListener('click', (e) => {
+      if (e.target.id === 'infoModal') closeModal();
+    });
+
+    // --- Chart.js: Interactive DuPont Analysis Visualization ---
+    window.onload = function() {
+      const ctx = document.getElementById('dupontChart');
+      if (ctx) {
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['淨利率 (%)', '資產週轉率 (次)', '權益乘數 (倍)', '綜合 ROE (%)'],
+            datasets: [
+              {
+                label: '和泰車 (2207)',
+                data: [8.8, 1.25, 2.1, 23.1],
+                backgroundColor: 'rgba(20, 184, 166, 0.85)',
+                borderColor: '#14b8a6',
+                borderWidth: 1,
+                borderRadius: 4
+              },
+              {
+                label: '裕隆 (2201)',
+                data: [5.2, 0.48, 2.9, 7.2],
+                backgroundColor: 'rgba(56, 189, 248, 0.85)',
+                borderColor: '#38bdf8',
+                borderWidth: 1,
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#94a3b8',
+                  font: { size: 10, family: 'Inter' }
+                }
+              },
+              tooltip: {
+                backgroundColor: '#0f172a',
+                titleColor: '#fff',
+                bodyColor: '#cbd5e1',
+                borderColor: '#334155',
+                borderWidth: 1
+              }
+            },
+            scales: {
+              x: {
+                ticks: { color: '#94a3b8', font: { size: 9 } },
+                grid: { display: false }
+              },
+              y: {
+                ticks: { color: '#64748b', font: { size: 9 } },
+                grid: { color: 'rgba(51, 65, 85, 0.3)' }
+              }
+            }
+          }
+        });
+      }
+    };
+  </script>
+</body>
+</html>
