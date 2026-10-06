@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="陳婷｜金融、資料分析與科技應用的跨域人才。">
+  <title>陳婷｜Finance × Data</title>
+  <style>
+    :root {
+      --ink: #11233e;
+      --navy: #0b1f3a;
+      --blue: #226be9;
+      --sky: #eaf3ff;
+      --aqua: #35c7b5;
+      --coral: #ff855f;
+      --paper: #fbfcff;
+      --line: #dfe7f2;
+      --muted: #65738b;
+      --gold: #f3ba54;
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); background: var(--paper);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(1140px, calc(100% - 40px)); margin: auto; }
+    .eyebrow { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--blue); }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: currentColor; }
+    h1,h2,h3,p { margin-top: 0; }
+    h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.22; letter-spacing: -.04em; }
+    .section { padding: 110px 0; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 46px; }
+    .section-heading p { max-width: 430px; margin: 0; color: var(--muted); }
+    .site-header { position: sticky; top: 0; z-index: 20; background: rgba(251,252,255,.86); border-bottom: 1px solid rgba(223,231,242,.8); backdrop-filter: blur(14px); }
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; gap: 10px; align-items: center; font-weight: 800; letter-spacing: .03em; }
+    .brand-mark { width: 33px; height: 33px; border-radius: 10px; display: grid; place-items: center; color: white; background: linear-gradient(135deg,var(--blue),#779eff); font-family: Georgia,serif; font-style: italic; font-size: 20px; }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: #40506a; font-size: 14px; font-weight: 700; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 19px; border: 0; border-radius: 12px; color: white; background: var(--blue); font-weight: 700; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(34,107,233,.24); }
+    .menu-button { display: none; border: 0; color: var(--ink); background: transparent; font-size: 24px; cursor: pointer; }
+    .hero { overflow: hidden; position: relative; padding: 95px 0 80px; background: linear-gradient(135deg,#f8fbff 0%,#eef5ff 62%,#e4f3f2 100%); }
+    .hero::before { content:""; position:absolute; width: 560px; height: 560px; border-radius:50%; right: -190px; top: -260px; background: radial-gradient(circle,rgba(53,199,181,.18),rgba(53,199,181,0)); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 60px; }
+    h1 { margin: 17px 0 22px; max-width: 730px; font-size: clamp(42px, 5.4vw, 70px); line-height: 1.12; letter-spacing: -.07em; }
+    h1 em { color: var(--blue); font-style: normal; }
+    .hero-copy > p { max-width: 560px; color: var(--muted); font-size: 17px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 31px; }
+    .button.secondary { color: var(--ink); background: white; border: 1px solid var(--line); }
+    .button.secondary:hover { box-shadow: 0 10px 22px rgba(24,55,95,.08); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 17px; margin-top: 43px; font-size: 13px; font-weight: 700; color: #53637d; }
+    .hero-meta span { display: inline-flex; gap: 7px; align-items: center; }
+    .dot { width: 8px; height: 8px; border-radius: 100%; background: var(--aqua); box-shadow: 0 0 0 4px rgba(53,199,181,.15); }
+    .dashboard { position: relative; min-height: 430px; padding: 23px; overflow: hidden; border: 1px solid rgba(255,255,255,.75); border-radius: 27px; background: rgba(255,255,255,.77); box-shadow: 0 30px 70px rgba(38,82,143,.16); backdrop-filter: blur(7px); }
+    .dashboard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 23px; font-size: 12px; font-weight: 700; }
+    .badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 999px; color: #147d70; background: #e5f8f5; }
+    .dash-title { font-size: 19px; font-weight: 800; }
+    .growth { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px; padding: 18px; border-radius: 16px; color: white; background: var(--navy); }
+    .growth small { color: #b9cae3; }
+    .growth strong { display: block; font-size: 31px; line-height: 1.2; }
+    .growth .up { color: #83e1d5; font-size: 14px; font-weight: 700; }
+    .chart { height: 142px; position: relative; margin-top: 20px; padding: 10px 0 0; }
+    .chart-grid { position: absolute; inset: 10px 0 0; background: repeating-linear-gradient(to bottom,transparent 0,transparent 34px,#e8eef7 35px), repeating-linear-gradient(to right,transparent 0,transparent 58px,#eff3f9 59px); }
+    .chart svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+    .chart path { fill: none; stroke: var(--blue); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+    .chart .area { fill: url(#fill); stroke: none; }
+    .chart .point { fill: white; stroke: var(--blue); stroke-width: 3; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 15px; }
+    .stat { padding: 12px; border: 1px solid var(--line); border-radius: 13px; }
+    .stat small { display:block; color:var(--muted); font-size: 11px; }
+    .stat b { font-size: 17px; }
+    .floating-tag { position: absolute; right: -15px; bottom: 48px; padding: 11px 14px; color: #0f6056; border-radius: 12px; background: #e5f8f5; box-shadow: 0 12px 25px rgba(30,107,100,.13); font-size: 12px; font-weight: 800; transform: rotate(3deg); }
+    .intro { padding: 36px 0; border-bottom: 1px solid var(--line); background: white; }
+    .intro-grid { display: grid; grid-template-columns: 1.4fr repeat(3,1fr); gap: 25px; align-items: center; }
+    .intro-phrase { font-family: Georgia,"Noto Serif TC",serif; font-size: 21px; line-height: 1.4; }
+    .metric { border-left: 1px solid var(--line); padding-left: 22px; }
+    .metric b { display:block; font-size: 23px; line-height:1.2; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: 72px; align-items: start; }
+    .portrait { min-height: 500px; position: relative; overflow: hidden; display: flex; align-items: end; padding: 30px; border-radius: var(--radius); background: linear-gradient(145deg,#dbeaff,#bcd5ff); }
+    .portrait::before { content:""; position:absolute; width: 280px; height:280px; border-radius: 50%; top: 38px; left: 55px; background: rgba(255,255,255,.42); }
+    .portrait::after { content:""; position:absolute; width: 210px; height:210px; border: 34px solid rgba(53,199,181,.32); border-radius:50%; top: 105px; right: -90px; }
+    .portrait-content { position:relative; z-index:1; width: 100%; padding: 22px; color: white; border-radius: 16px; background: rgba(11,31,58,.88); }
+    .portrait-content b { display:block; font-size: 20px; }
+    .portrait-content small { color:#c2d0e5; }
+    .about-copy p { color: var(--muted); }
+    .skills { display: grid; grid-template-columns: repeat(2,1fr); gap: 11px; margin-top: 27px; }
+    .skill { display:flex; gap: 10px; align-items:center; padding: 13px 14px; border-radius: 12px; background: var(--sky); font-size: 14px; font-weight:700; }
+    .skill i { width: 8px; height: 8px; border-radius: 50%; background:var(--blue); }
+    .journey { margin-top: 38px; padding-top: 25px; border-top: 1px solid var(--line); }
+    .journey-item { position:relative; padding: 0 0 22px 22px; border-left: 1px solid #bcd0ef; }
+    .journey-item:last-child { padding-bottom:0; }
+    .journey-item::before { content:""; position:absolute; width: 9px; height:9px; border: 3px solid white; border-radius:50%; left:-6px; top:4px; background:var(--blue); box-shadow:0 0 0 1px var(--blue); }
+    .journey-item small { color:var(--blue); font-weight: 800; }
+    .journey-item b { display:block; margin-top:2px; }
+    .portfolio { background: var(--navy); color:white; }
+    .portfolio .eyebrow { color:#7fb5ff; }
+    .portfolio .section-heading p { color:#afc0da; }
+    .filters { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:28px; }
+    .filter { padding:8px 13px; border:1px solid rgba(200,218,244,.28); border-radius:999px; color:#baccdf; background:transparent; font-size:13px; cursor:pointer; }
+    .filter.active, .filter:hover { color:var(--navy); border-color:#fff; background:#fff; }
+    .portfolio-grid { display:grid; grid-template-columns: 1.25fr .9fr .9fr; gap:16px; }
+    .project { min-height: 290px; position:relative; display:flex; flex-direction:column; justify-content:end; padding:25px; overflow:hidden; border:1px solid rgba(200,218,244,.16); border-radius:18px; background:rgba(255,255,255,.06); transition: transform .25s, background .25s; }
+    .project:hover { transform:translateY(-5px); background:rgba(255,255,255,.11); }
+    .project.large { grid-row:span 2; min-height:596px; background:linear-gradient(155deg,#1a4ea8,#0f2d5a); }
+    .project::before { content:""; position:absolute; width:180px; height:180px; border:1px solid rgba(255,255,255,.15); border-radius:50%; right:-48px; top:-50px; }
+    .project.large::after { content:""; position:absolute; width:300px; height:130px; border-radius:50%; left:-24px; top:110px; border:36px solid rgba(109,197,255,.16); transform:rotate(-25deg); }
+    .project-label { position:relative; z-index:1; color:#8be1d7; font-size:12px; font-weight:800; letter-spacing:.05em; }
+    .project h3 { position:relative; z-index:1; margin:7px 0 7px; font-size:23px; line-height:1.3; }
+    .project p { position:relative; z-index:1; margin:0; color:#bed0e7; font-size:13px; }
+    .project .arrow { position:relative; z-index:1; margin-top:17px; color:white; font-size:20px; }
+    .project.hidden { display:none; }
+    .cred { display:grid; grid-template-columns: 1.1fr .9fr; gap:65px; align-items:start; }
+    .credentials { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+    .credential { padding:21px; border:1px solid var(--line); border-radius:16px; background:white; }
+    .credential .symbol { display:grid; place-items:center; width:38px; height:38px; margin-bottom:17px; border-radius:10px; color:var(--blue); background:var(--sky); font-weight:900; }
+    .credential b { display:block; line-height:1.35; }
+    .credential small { color:var(--muted); }
+    .blog { background:#f2f6fc; }
+    .posts { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .post { display:flex; flex-direction:column; min-height:280px; padding:25px; border:1px solid var(--line); border-radius:17px; background:white; }
+    .post-tag { color:var(--blue); font-size:12px; font-weight:800; }
+    .post h3 { margin:14px 0 10px; font-size:20px; line-height:1.4; }
+    .post p { color:var(--muted); font-size:14px; }
+    .post a { margin-top:auto; color:var(--blue); font-size:14px; font-weight:800; }
+    .contact { padding:105px 0; overflow:hidden; color:white; background:var(--navy); }
+    .contact-grid { display:grid; grid-template-columns: .9fr 1.1fr; gap:75px; align-items:start; }
+    .contact h2 { margin:14px 0 20px; }
+    .contact p { color:#b7c7dc; }
+    .contact-links { margin-top:34px; }
+    .contact-links a { display:flex; justify-content:space-between; max-width:330px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.16); color:#d9e5f5; font-size:14px; }
+    .contact-form { padding:28px; border:1px solid rgba(255,255,255,.16); border-radius:20px; background:rgba(255,255,255,.05); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    label { display:block; margin-bottom:16px; color:#c7d5e6; font-size:13px; font-weight:700; }
+    input,textarea { width:100%; margin-top:6px; padding:11px 12px; border:1px solid rgba(255,255,255,.2); outline:none; border-radius:9px; color:white; background:rgba(255,255,255,.07); }
+    input:focus,textarea:focus { border-color:#82b2ff; box-shadow:0 0 0 3px rgba(126,176,255,.15); }
+    textarea { min-height:100px; resize:vertical; }
+    .form-note { min-height:22px; margin:12px 0 0; color:#8be1d7; font-size:13px; }
+    footer { padding:22px 0; color:#8294ac; background:#07152a; font-size:12px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:15px; }
+    .reveal { opacity:0; transform:translateY(16px); transition:opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    @media (max-width: 860px) {
+      .nav-links { display:none; position:absolute; top:74px; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; padding:12px 20px 20px; border-bottom:1px solid var(--line); background:var(--paper); }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:10px 0; }
+      .nav-cta { margin-top:7px; text-align:center; }
+      .menu-button { display:block; }
+      .hero-grid,.about-grid,.cred,.contact-grid { grid-template-columns:1fr; gap:42px; }
+      .dashboard { max-width:600px; width:100%; margin:auto; }
+      .intro-grid { grid-template-columns:1fr 1fr; }
+      .intro-phrase { grid-column:1/-1; }
+      .portfolio-grid { grid-template-columns:1fr 1fr; }
+      .project.large { grid-row:auto; min-height:370px; grid-column:1/-1; }
+    }
+    @media (max-width: 580px) {
+      .container { width:min(100% - 28px,1140px); }
+      .section,.contact { padding:76px 0; }
+      .hero { padding:68px 0 58px; }
+      .section-heading { display:block; margin-bottom:32px; }
+      .section-heading p { margin-top:12px; }
+      h1 { font-size:43px; }
+      .intro-grid,.portfolio-grid,.posts,.credentials,.form-row { grid-template-columns:1fr; }
+      .metric { border-left:0; border-top:1px solid var(--line); padding:14px 0 0; }
+      .project.large { grid-column:auto; min-height:330px; }
+      .skills { grid-template-columns:1fr; }
+      .portrait { min-height:340px; }
+      .footer-inner { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="主要導覽">
+      <a class="brand" href="#top"><span class="brand-mark">C</span><span>陳婷 <small>Finance × Data</small></span></a>
+      <button class="menu-button" id="menuButton" aria-label="開啟選單" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">關於我</a>
+        <a href="#portfolio">作品集</a>
+        <a href="#blog">技術部落格</a>
+        <a class="nav-cta" href="#contact">聯絡我 ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">FINANCE × DATA × TECHNOLOGY</span>
+          <h1>用金融專業<br>洞察<em>數據</em>，以科技<br>創造價值。</h1>
+          <p>我是陳婷，就讀國立暨南大學財務金融研究所。從企業財報到資料分析，我相信好的決策，始於理解數字背後的故事。</p>
+          <div class="hero-actions">
+            <a class="button" href="#portfolio">探索我的作品 <span>↓</span></a>
+            <a class="button secondary" href="#about">認識我</a>
+          </div>
+          <div class="hero-meta"><span><i class="dot"></i> 尋找實習機會</span><span>台灣｜可遠端協作</span></div>
+        </div>
+        <div class="dashboard reveal" aria-label="資料分析儀表板示意圖">
+          <div class="dashboard-top"><span class="dash-title">Insight Dashboard</span><span class="badge"><i class="dot"></i> Analysis ready</span></div>
+          <div class="growth"><div><small>Financial Performance Index</small><strong>84.6</strong></div><span class="up">↗ +12.4%</span></div>
+          <div class="chart"><div class="chart-grid"></div><svg viewBox="0 0 440 130" role="img" aria-label="上升中的分析趨勢線"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#226be9" stop-opacity=".22"/><stop offset="100%" stop-color="#226be9" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0,110 C35,105 42,91 72,95 S108,72 142,80 S175,90 202,66 S238,84 272,48 S315,66 342,38 S390,49 440,12 L440,130 L0,130 Z"/><path d="M0,110 C35,105 42,91 72,95 S108,72 142,80 S175,90 202,66 S238,84 272,48 S315,66 342,38 S390,49 440,12"/><circle class="point" cx="440" cy="12" r="5"/></svg></div>
+          <div class="stats"><div class="stat"><small>Data sources</small><b>12+</b></div><div class="stat"><small>Key metrics</small><b>36</b></div><div class="stat"><small>Tools</small><b>04</b></div></div>
+          <div class="floating-tag">Financial insight<br>made actionable</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="container intro-grid">
+        <div class="intro-phrase">從分析報表，到做出更有根據的判斷。</div>
+        <div class="metric"><b>Finance</b><span>財報分析・市場研究</span></div>
+        <div class="metric"><b>Data</b><span>Python・SQL・Excel</span></div>
+        <div class="metric"><b>Digital</b><span>HTML・JavaScript</span></div>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="container about-grid">
+        <div class="portrait reveal"><div class="portrait-content"><b>陳婷</b><small>金融思維 × 數據能力 × 創新視野</small></div></div>
+        <div class="about-copy reveal">
+          <span class="eyebrow">ABOUT ME</span>
+          <h2>不只看見數字，<br>更看見數字背後的機會。</h2>
+          <p>我的專業以財務金融為核心，並積極跨足資料分析與網頁技術。透過財務比率、營運表現與產業環境比較，我學習從企業數據理解經營狀況與市場競爭力。</p>
+          <p>我期待將金融知識與科技工具結合，將分析結果轉化成有實際價值的決策資訊，為團隊帶來清晰、可行的洞察。</p>
+          <div class="skills"><div class="skill"><i></i>財務報表與產業分析</div><div class="skill"><i></i>Excel 商業分析</div><div class="skill"><i></i>Python 資料處理</div><div class="skill"><i></i>SQL 資料查詢</div><div class="skill"><i></i>HTML 網頁建置</div><div class="skill"><i></i>JavaScript 互動應用</div></div>
+          <div class="journey"><div class="journey-item"><small>現在</small><b>國立暨南大學財務金融研究所 碩二</b></div><div class="journey-item"><small>持續累積</small><b>金融實務、數位技能與跨域專案經驗</b></div><div class="journey-item"><small>目標</small><b>金融科技／資料分析／商業分析實習</b></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section portfolio" id="portfolio">
+      <div class="container">
+        <div class="section-heading reveal"><div><span class="eyebrow">SELECTED WORK</span><h2>作品集與案例展示</h2></div><p>將金融理論、資料工具與清晰敘事結合，讓分析不止停在表格之中。</p></div>
+        <div class="filters" role="group" aria-label="作品分類"><button class="filter active" data-filter="all">全部作品</button><button class="filter" data-filter="finance">財務分析</button><button class="filter" data-filter="data">資料分析</button><button class="filter" data-filter="web">網頁實作</button></div>
+        <div class="portfolio-grid">
+          <article class="project large reveal" data-category="finance"><span class="project-label">FINANCIAL ANALYSIS</span><h3>和泰車 vs. 裕隆<br>財務報表分析</h3><p>比較財務比率、營運表現與產業環境，從數字梳理企業的競爭位置。</p><span class="arrow">↗</span></article>
+          <article class="project reveal" data-category="data"><span class="project-label">PYTHON · DATA</span><h3>財金資料分析練習</h3><p>從資料清理、探索到視覺化呈現的分析流程。</p><span class="arrow">↗</span></article>
+          <article class="project reveal" data-category="data"><span class="project-label">SQL · INSIGHT</span><h3>資料庫查詢與洞察</h3><p>以結構化查詢整理資料，建立可回應問題的分析基礎。</p><span class="arrow">↗</span></article>
+          <article class="project reveal" data-category="web"><span class="project-label">WEB DEVELOPMENT</span><h3>個人品牌網站</h3><p>以清晰的資訊架構，呈現跨域能力與專案成果。</p><span class="arrow">↗</span></article>
+          <article class="project reveal" data-category="finance"><span class="project-label">INVESTMENT</span><h3>投資競賽研究紀錄</h3><p>證券投資智慧王與股市金字塔的市場分析實作。</p><span class="arrow">↗</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cred">
+        <div class="reveal"><span class="eyebrow">HIGHLIGHTS</span><h2>能分析，也能<br>在團隊裡前進。</h2><p style="color:var(--muted);max-width:430px">書卷獎與投資競賽磨練了我的市場敏銳度；餐飲、咖啡、露營區與茶廠的工作經歷，則讓我理解溝通、細心與應變同樣是完成工作的關鍵。</p><a class="button secondary" href="#contact">下載履歷／聯絡我 ↗</a></div>
+        <div class="credentials reveal"><div class="credential"><div class="symbol">#3</div><b>書卷獎</b><small>系排名第三</small></div><div class="credential"><div class="symbol">✓</div><b>信託業業務人員</b><small>專業金融證照</small></div><div class="credential"><div class="symbol">↗</div><b>證券商業務員</b><small>專業金融證照</small></div><div class="credential"><div class="symbol">◎</div><b>團隊協作</b><small>排球隊・熱音社・多元工作經驗</small></div></div>
+      </div>
+    </section>
+
+    <section class="section blog" id="blog">
+      <div class="container">
+        <div class="section-heading reveal"><div><span class="eyebrow">THINKING & NOTES</span><h2>技術部落格</h2></div><p>記錄金融市場觀察、資料分析方法與技術學習軌跡。</p></div>
+        <div class="posts">
+          <article class="post reveal"><span class="post-tag">FINANCIAL ANALYSIS</span><h3>如何從財務比率讀懂一家公司的營運狀況？</h3><p>以獲利、償債與營運效率三個角度，建立閱讀財報的基礎框架。</p><a href="#contact">閱讀文章 →</a></article>
+          <article class="post reveal"><span class="post-tag">PYTHON & DATA</span><h3>從原始資料到洞察：我的 Python 分析流程</h3><p>資料清理、探索性分析與視覺化，是把資料變成決策資訊的必經過程。</p><a href="#contact">閱讀文章 →</a></article>
+          <article class="post reveal"><span class="post-tag">LEARNING LOG</span><h3>金融人學網頁：為什麼我開始學 JavaScript？</h3><p>用互動式網頁呈現分析成果，讓專業內容能被更直覺地理解。</p><a href="#contact">閱讀文章 →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal"><span class="eyebrow" style="color:#83b4ff">LET'S CONNECT</span><h2>讓我們一起把數據，<br>變成下一個機會。</h2><p>目前正尋找金融科技、資料分析、商業分析相關的實習機會。若有合適的專案、職缺或合作想法，期待與你交流。</p><div class="contact-links"><a href="#contact"><span>Email</span><span>請使用右側表單 ↗</span></a><a href="#"><span>LinkedIn</span><span>待補上個人連結 ↗</span></a><a href="#"><span>GitHub</span><span>待補上作品連結 ↗</span></a></div></div>
+        <form class="contact-form reveal" id="contactForm"><div class="form-row"><label>您的姓名<input required name="name" placeholder="請輸入姓名"></label><label>Email<input required type="email" name="email" placeholder="name@example.com"></label></div><label>想聊聊什麼？<textarea required name="message" placeholder="歡迎留下職缺、合作機會或想交流的主題。"></textarea></label><button class="button" type="submit">送出訊息 ↗</button><p class="form-note" id="formNote" aria-live="polite"></p></form>
+      </div>
+    </section>
+  </main>
+  <footer><div class="container footer-inner"><span>© 2026 陳婷 · Finance × Data</span><span>Built with curiosity and intention.</span></div></footer>
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const navLinks = document.getElementById('navLinks');
+    menuButton.addEventListener('click', () => { const open = navLinks.classList.toggle('open'); menuButton.setAttribute('aria-expanded', open); menuButton.textContent = open ? '×' : '☰'; });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navLinks.classList.remove('open'); menuButton.setAttribute('aria-expanded','false'); menuButton.textContent = '☰'; }));
+    document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('.filter').forEach(b => b.classList.remove('active')); button.classList.add('active'); const filter = button.dataset.filter; document.querySelectorAll('.project').forEach(project => project.classList.toggle('hidden', filter !== 'all' && project.dataset.category !== filter)); }));
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+    document.getElementById('contactForm').addEventListener('submit', event => { event.preventDefault(); document.getElementById('formNote').textContent = '謝謝你的訊息！正式上線前可串接表單服務，將訊息寄送至你的信箱。'; event.currentTarget.reset(); });
+  </script>
+</body>
+</html>
